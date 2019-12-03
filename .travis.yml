@@ -3,17 +3,19 @@ node_js:
 -10.9.0
 cache: npm
 
+before_install:
+  - mkdir dist
+  - ls
 install:
-  - npm ci
+  - npm install
+  - ls -la
 
 script:
   - npm test
   - npm start
 
 deploy:
-  provider: pages
+  provider: script
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
-  local_dir: build
-  on:
-    branch: gh-pages
+  
