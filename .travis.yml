@@ -1,20 +1,21 @@
 language: node_js
 node_js:
--10.9.0
+  - 10.9.0
+
 cache: npm
 
 before_install:
-  - mkdir dist
-  - ls
+  - "npm config set spin false"
+  - npm i -g now
+
 install:
   - npm install
-  - ls -la
 
 script:
-  - npm test
-  - npm start
+  - npm run build
+  - npm run test
 
 deploy:
   provider: script
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
+  script: bash scripts/deploy.sh
+  skip_cleanup: true
